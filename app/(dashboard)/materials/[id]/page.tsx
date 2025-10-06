@@ -196,7 +196,7 @@ export default function MaterialDetailPage() {
             {/* Material Viewer */}
             <MaterialViewer
               materialId={materialId}
-              fileUrl={`${process.env.NEXT_PUBLIC_API_URL?.replace('/api/v1', '') || 'https://edubridge-backend-fcj0.onrender.com'}${material.fileUrl}`}
+              fileUrl={`https://edubridge-backend-fcj0.onrender.com${material.fileUrl}`}
               fileName={material.fileName}
               fileType={material.fileType}
               fileSize={material.fileSize}

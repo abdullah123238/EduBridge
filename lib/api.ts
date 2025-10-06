@@ -2,7 +2,7 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 
 export const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL || 'https://edubridge-backend-fcj0.onrender.com/api/v1',
+  baseURL: '/api', // Force use of proxy, ignore environment variable
   headers: {
     'Content-Type': 'application/json',
   },
