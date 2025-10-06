@@ -63,7 +63,7 @@ export default function EditMaterialPage() {
       reset({
         title: materialData.data.title,
         description: materialData.data.description || '',
-        category: materialData.data.category || 'other',
+        category: (materialData.data.category as 'lecture-notes' | 'resources' | 'other') || 'other',
       });
     }
   }, [materialData, reset]);
@@ -200,7 +200,7 @@ export default function EditMaterialPage() {
                       <Label htmlFor="category">Category</Label>
                       <Select
                         value={selectedCategory}
-                        onValueChange={(value) => setValue('category', value)}
+                        onValueChange={(value) => setValue('category', value as 'lecture-notes' | 'resources' | 'other')}
                       >
                         <SelectTrigger className={errors.category ? 'border-red-500' : ''}>
                           <SelectValue placeholder="Select a category" />

@@ -183,7 +183,7 @@ export default function AssignmentsPage() {
               </div>
             ) : assignments.length > 0 ? (
               <div className="space-y-4">
-                {assignments.map((assignment, index) => (
+                {assignments.map((assignment: any, index: number) => (
                   <motion.div
                     key={assignment._id}
                     initial={{ opacity: 0, y: 20 }}
@@ -325,7 +325,7 @@ export default function AssignmentsPage() {
                 <CardContent>
                   <div className="text-2xl font-bold">{assignments.length}</div>
                   <p className="text-xs text-muted-foreground">
-                    {assignments.filter(a => a.status === 'published').length} published
+                    {assignments.filter((a: any) => a.status === 'published').length} published
                   </p>
                 </CardContent>
               </Card>
@@ -337,7 +337,7 @@ export default function AssignmentsPage() {
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold">
-                    {assignments.reduce((sum, a) => sum + a.totalSubmissions, 0)}
+                    {assignments.reduce((sum: number, a: any) => sum + a.totalSubmissions, 0)}
                   </div>
                   <p className="text-xs text-muted-foreground">
                     Across all assignments
@@ -353,7 +353,7 @@ export default function AssignmentsPage() {
                 <CardContent>
                   <div className="text-2xl font-bold">
                     {assignments.length > 0 
-                      ? Math.round(assignments.reduce((sum, a) => sum + a.averageScore, 0) / assignments.length)
+                      ? Math.round(assignments.reduce((sum: number, a: any) => sum + a.averageScore, 0) / assignments.length)
                       : 0}%
                   </div>
                   <p className="text-xs text-muted-foreground">
@@ -372,7 +372,7 @@ export default function AssignmentsPage() {
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  {assignments.map((assignment) => (
+                  {assignments.map((assignment: any) => (
                     <div key={assignment._id} className="flex items-center justify-between p-4 border rounded-lg">
                       <div>
                         <h4 className="font-medium">{assignment.title}</h4>

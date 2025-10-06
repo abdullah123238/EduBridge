@@ -156,7 +156,7 @@ function LecturerAssignmentsPage() {
             <CardContent>
               <div className="text-2xl font-bold">{assignments.length}</div>
               <p className="text-xs text-muted-foreground">
-                {assignments.filter(a => a.status === 'published').length} published
+                {assignments.filter((a: any) => a.status === 'published').length} published
               </p>
             </CardContent>
           </Card>
@@ -168,7 +168,7 @@ function LecturerAssignmentsPage() {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">
-                {assignments.reduce((sum, a) => sum + (a.totalSubmissions || 0), 0)}
+                {assignments.reduce((sum: number, a: any) => sum + (a.totalSubmissions || 0), 0)}
               </div>
               <p className="text-xs text-muted-foreground">
                 Across all assignments
@@ -183,7 +183,7 @@ function LecturerAssignmentsPage() {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">
-                {assignments.reduce((sum, a) => sum + (a.pendingGrading || 0), 0)}
+                {assignments.reduce((sum: number, a: any) => sum + (a.pendingGrading || 0), 0)}
               </div>
               <p className="text-xs text-muted-foreground">
                 Need your attention
@@ -227,7 +227,7 @@ function LecturerAssignmentsPage() {
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
-                  {assignments.slice(0, 5).map((assignment, index) => (
+                  {assignments.slice(0, 5).map((assignment: any, index: number) => (
                     <div key={assignment._id} className="flex items-center space-x-3 p-3 border rounded-lg">
                       <div className="p-2 bg-scholiax-purple/10 rounded-full">
                         <FileText className="w-4 h-4 text-scholiax-purple" />
@@ -260,8 +260,8 @@ function LecturerAssignmentsPage() {
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  {courses.map((course, index) => {
-                    const courseAssignments = assignments.filter(a => a.course._id === course._id);
+                  {courses.map((course: any, index: number) => {
+                    const courseAssignments = assignments.filter((a: any) => a.course._id === course._id);
                     return (
                       <motion.div
                         key={course._id}
@@ -283,8 +283,8 @@ function LecturerAssignmentsPage() {
                           </div>
                         </div>
                         <div className="flex items-center justify-between text-sm text-gray-600">
-                          <span>{courseAssignments.filter(a => a.status === 'published').length} published</span>
-                          <span>{courseAssignments.reduce((sum, a) => sum + (a.totalSubmissions || 0), 0)} submissions</span>
+                          <span>{courseAssignments.filter((a: any) => a.status === 'published').length} published</span>
+                          <span>{courseAssignments.reduce((sum: number, a: any) => sum + (a.totalSubmissions || 0), 0)} submissions</span>
                           <Link href={`/assignments/course/${course._id}`}>
                             <Button size="sm" variant="outline">
                               <Eye className="w-4 h-4 mr-2" />
@@ -329,7 +329,7 @@ function LecturerAssignmentsPage() {
               </div>
             ) : assignments.length > 0 ? (
               <div className="space-y-4">
-                {assignments.map((assignment, index) => (
+                {assignments.map((assignment: any, index: number) => (
                   <motion.div
                     key={assignment._id}
                     initial={{ opacity: 0, y: 20 }}
@@ -451,8 +451,8 @@ function LecturerAssignmentsPage() {
                   </div>
                 ) : courses.length > 0 ? (
                   <div className="space-y-4">
-                    {courses.map((course, index) => {
-                      const courseAssignments = assignments.filter(a => a.course._id === course._id);
+                    {courses.map((course: any, index: number) => {
+                      const courseAssignments = assignments.filter((a: any) => a.course._id === course._id);
                       return (
                         <motion.div
                           key={course._id}
@@ -484,7 +484,7 @@ function LecturerAssignmentsPage() {
                           
                           {courseAssignments.length > 0 ? (
                             <div className="space-y-3">
-                              {courseAssignments.slice(0, 3).map((assignment) => (
+                              {courseAssignments.slice(0, 3).map((assignment: any) => (
                                 <div key={assignment._id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                                   <div className="flex items-center space-x-3">
                                     <div className="w-2 h-2 rounded-full bg-scholiax-purple"></div>
@@ -563,11 +563,11 @@ function LecturerAssignmentsPage() {
                       </div>
                     ))}
                   </div>
-                ) : assignments.filter(a => a.pendingGrading > 0).length > 0 ? (
+                ) : assignments.filter((a: any) => a.pendingGrading > 0).length > 0 ? (
                   <div className="space-y-4">
                     {assignments
-                      .filter(a => a.pendingGrading > 0)
-                      .map((assignment, index) => (
+                      .filter((a: any) => a.pendingGrading > 0)
+                      .map((assignment: any, index: number) => (
                         <motion.div
                           key={assignment._id}
                           initial={{ opacity: 0, y: 20 }}
@@ -763,7 +763,7 @@ function StudentAssignmentsPage() {
               </div>
             ) : assignments.length > 0 ? (
               <div className="space-y-4">
-                {assignments.map((assignment, index) => (
+                {assignments.map((assignment: any, index: number) => (
                   <motion.div
                     key={assignment._id}
                     initial={{ opacity: 0, y: 20 }}
@@ -877,8 +877,8 @@ function StudentAssignmentsPage() {
           <TabsContent value="submitted" className="space-y-6">
             <div className="space-y-4">
               {assignments
-                .filter(a => a.submission && (a.submission.status === 'submitted' || a.submission.status === 'graded'))
-                .map((assignment, index) => (
+                .filter((a: any) => a.submission && (a.submission.status === 'submitted' || a.submission.status === 'graded'))
+                .map((assignment: any, index: number) => (
                   <motion.div
                     key={assignment._id}
                     initial={{ opacity: 0, y: 20 }}
@@ -966,8 +966,8 @@ function StudentAssignmentsPage() {
           <TabsContent value="graded" className="space-y-6">
             <div className="space-y-4">
               {assignments
-                .filter(a => a.submission && a.submission.status === 'graded')
-                .map((assignment, index) => (
+                .filter((a: any) => a.submission && a.submission.status === 'graded')
+                .map((assignment: any, index: number) => (
                   <motion.div
                     key={assignment._id}
                     initial={{ opacity: 0, y: 20 }}

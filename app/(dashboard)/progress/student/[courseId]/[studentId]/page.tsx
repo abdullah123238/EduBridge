@@ -343,7 +343,7 @@ export default function StudentProgressPage() {
                   </div>
                 ) : materials.length > 0 ? (
                   <div className="space-y-4">
-                    {materials.map((material, index) => (
+                    {materials.map((material: any, index: number) => (
                       <motion.div
                         key={material._id}
                         initial={{ opacity: 0, y: 20 }}
@@ -426,7 +426,7 @@ export default function StudentProgressPage() {
                   </div>
                 ) : assignments.length > 0 ? (
                   <div className="space-y-4">
-                    {assignments.map((assignment, index) => (
+                    {assignments.map((assignment: any, index: number) => (
                       <motion.div
                         key={assignment._id}
                         initial={{ opacity: 0, y: 20 }}
@@ -544,7 +544,7 @@ export default function StudentProgressPage() {
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-3">
-                    {student.achievements?.map((achievement, index) => (
+                    {student.achievements?.map((achievement: any, index: number) => (
                       <div key={index} className="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg">
                         <Award className="w-5 h-5 text-scholiax-purple" />
                         <div>

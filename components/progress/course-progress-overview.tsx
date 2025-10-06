@@ -1,5 +1,5 @@
 import React from 'react';
-import { useCourseProgress } from '@/hooks/use-progress';
+import { useCourseProgressDetail } from '@/hooks/use-progress';
 import { ProgressBar } from './progress-bar';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -26,7 +26,7 @@ export const CourseProgressOverview: React.FC<CourseProgressOverviewProps> = ({
   courseId,
   className = ''
 }) => {
-  const { data: progress, isLoading, error } = useCourseProgress(courseId);
+  const { data: progress, isLoading, error } = useCourseProgressDetail(courseId);
 
   if (isLoading) {
     return (

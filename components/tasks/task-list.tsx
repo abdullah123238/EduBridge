@@ -168,7 +168,7 @@ export const TaskList: React.FC<TaskListProps> = ({ className = '' }) => {
       {/* Tasks List */}
       {tasks.length > 0 ? (
         <div className="space-y-4">
-          {tasks.map((task, index) => (
+          {tasks.map((task: any, index: number) => (
             <motion.div
               key={task._id}
               initial={{ opacity: 0, y: 20 }}

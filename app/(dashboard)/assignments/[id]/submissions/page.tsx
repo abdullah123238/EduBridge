@@ -87,13 +87,13 @@ export default function AssignmentSubmissionsPage() {
 
   // Filter and sort submissions
   const filteredSubmissions = submissions
-    .filter(submission => {
+    .filter((submission: any) => {
       const matchesSearch = submission.student.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
                            submission.student.email.toLowerCase().includes(searchTerm.toLowerCase());
       const matchesStatus = statusFilter === 'all' || submission.status === statusFilter;
       return matchesSearch && matchesStatus;
     })
-    .sort((a, b) => {
+    .sort((a: any, b: any) => {
       let aValue, bValue;
       
       switch (sortBy) {
@@ -147,9 +147,9 @@ export default function AssignmentSubmissionsPage() {
 
   const submissionStats = {
     total: submissions.length,
-    submitted: submissions.filter(s => s.status === 'submitted').length,
-    graded: submissions.filter(s => s.status === 'graded').length,
-    late: submissions.filter(s => s.isLate).length
+    submitted: submissions.filter((s: any) => s.status === 'submitted').length,
+    graded: submissions.filter((s: any) => s.status === 'graded').length,
+    late: submissions.filter((s: any) => s.isLate).length
   };
 
   return (
@@ -319,7 +319,7 @@ export default function AssignmentSubmissionsPage() {
               </div>
             ) : filteredSubmissions.length > 0 ? (
               <div className="space-y-4">
-                {filteredSubmissions.map((submission, index) => (
+                {filteredSubmissions.map((submission: any, index: number) => (
                   <motion.div
                     key={submission._id}
                     initial={{ opacity: 0, y: 20 }}

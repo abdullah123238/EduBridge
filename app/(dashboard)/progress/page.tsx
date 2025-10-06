@@ -118,7 +118,7 @@ export default function ProgressTrackingPage() {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">
-                {courses.reduce((sum, course) => sum + course.totalStudents, 0)}
+                {courses.reduce((sum: number, course: any) => sum + course.totalStudents, 0)}
               </div>
               <p className="text-xs text-muted-foreground">
                 Across all courses
@@ -134,7 +134,7 @@ export default function ProgressTrackingPage() {
             <CardContent>
               <div className="text-2xl font-bold">{courses.length}</div>
               <p className="text-xs text-muted-foreground">
-                {courses.filter(c => c.averageProgress > 0).length} with activity
+                {courses.filter((c: any) => c.averageProgress > 0).length} with activity
               </p>
             </CardContent>
           </Card>
@@ -146,7 +146,7 @@ export default function ProgressTrackingPage() {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">
-                {materials.filter(m => m.completionRate >= 100).length}
+                {materials.filter((m: any) => m.completionRate >= 100).length}
               </div>
               <p className="text-xs text-muted-foreground">
                 Out of {materials.length} total
@@ -161,7 +161,7 @@ export default function ProgressTrackingPage() {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">
-                {tasks.reduce((sum, task) => sum + task.totalSubmissions, 0)}
+                {tasks.reduce((sum: number, task: any) => sum + task.totalSubmissions, 0)}
               </div>
               <p className="text-xs text-muted-foreground">
                 {tasks.length} assignments
@@ -201,7 +201,7 @@ export default function ProgressTrackingPage() {
                   </div>
                 ) : courses.length > 0 ? (
                   <div className="space-y-4">
-                    {courses.map((course, index) => (
+                    {courses.map((course: any, index: number) => (
                       <motion.div
                         key={course._id}
                         initial={{ opacity: 0, y: 20 }}
@@ -263,7 +263,7 @@ export default function ProgressTrackingPage() {
                   </div>
                 ) : materials.length > 0 ? (
                   <div className="space-y-4">
-                    {materials.map((material, index) => (
+                    {materials.map((material: any, index: number) => (
                       <motion.div
                         key={material._id}
                         initial={{ opacity: 0, y: 20 }}
@@ -272,12 +272,9 @@ export default function ProgressTrackingPage() {
                       >
                         <MaterialProgress
                           materialId={material._id}
-                          title={material.title}
-                          courseTitle={material.courseTitle}
-                          totalStudents={material.totalStudents}
-                          completionRate={material.completionRate}
-                          averageTimeSpent={material.averageTimeSpent}
-                          lastAccessed={material.lastAccessed}
+                          materialTitle={material.title}
+                          materialType={material.type || 'document'}
+                          duration={material.duration || 0}
                         />
                       </motion.div>
                     ))}
@@ -323,7 +320,7 @@ export default function ProgressTrackingPage() {
                   </div>
                 ) : tasks.length > 0 ? (
                   <div className="space-y-4">
-                    {tasks.map((task, index) => (
+                    {tasks.map((task: any, index: number) => (
                       <motion.div
                         key={task._id}
                         initial={{ opacity: 0, y: 20 }}

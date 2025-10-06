@@ -42,7 +42,7 @@ export default function DashboardPage() {
   }, 0) : 0;
 
   // Calculate pending assignments for students
-  const pendingAssignments = !isLecturer ? studentTasks.filter(task => {
+  const pendingAssignments = !isLecturer ? studentTasks.filter((task: any) => {
     // Check if task is published and visible
     if (task.status !== 'published' || !task.isVisible) return false;
     

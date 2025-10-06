@@ -186,7 +186,7 @@ export default function UploadMaterialPage() {
 
                 <div className="space-y-2">
                   <Label htmlFor="category">Category *</Label>
-                  <Select onValueChange={(value) => setValue('category', value)}>
+                  <Select onValueChange={(value) => setValue('category', value as 'lecture-notes' | 'resources' | 'other')}>
                     <SelectTrigger>
                       <SelectValue placeholder="Select a category" />
                     </SelectTrigger>

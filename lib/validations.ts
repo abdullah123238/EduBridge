@@ -40,7 +40,7 @@ export const materialSchema = z.object({
   description: z.string().max(500, 'Description must be less than 500 characters').optional(),
   courseId: z.string().min(1, 'Please select a course'),
   category: z.enum(['lecture-notes', 'resources', 'other'], {
-    errorMap: () => ({ message: 'Category must be Lecture Notes, Resources, or Other' })
+    message: 'Category must be Lecture Notes, Resources, or Other'
   }),
 });
 

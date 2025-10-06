@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { DashboardLayout } from '@/components/layout/dashboard-layout';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -45,7 +45,7 @@ interface Resource {
   type: 'link' | 'file' | 'video' | 'document';
 }
 
-export default function CreateAssignmentPage() {
+function CreateAssignmentContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { user } = useAuth();
@@ -190,10 +190,22 @@ export default function CreateAssignmentPage() {
       return;
     }
 
+    const selectedCourse = courses.find((c: any) => c._id === formData.course);
+    
+    if (!selectedCourse) {
+      toast.error('Selected course not found');
+      return;
+    }
+    
     const assignmentData = {
       ...formData,
+      course: {
+        _id: selectedCourse._id,
+        title: selectedCourse.title,
+        code: selectedCourse.code
+      },
       status,
-      learningObjectives: formData.learningObjectives.map(obj => obj.text),
+      learningObjectives: formData.learningObjectives.map((obj: any) => obj.text),
       tags: formData.tags
     };
 
@@ -280,7 +292,7 @@ export default function CreateAssignmentPage() {
                         <SelectValue placeholder="Select a course" />
                       </SelectTrigger>
                       <SelectContent>
-                        {courses.map((course) => (
+                        {courses.map((course: any) => (
                           <SelectItem key={course._id} value={course._id}>
                             {course.title} ({course.code})
                           </SelectItem>
@@ -542,7 +554,7 @@ export default function CreateAssignmentPage() {
                     placeholder="URL or file path"
                   />
                   <div className="flex space-x-2">
-                    <Select value={newResource.type} onValueChange={(value) => setNewResource(prev => ({ ...prev, type: value }))}>
+                    <Select value={newResource.type} onValueChange={(value) => setNewResource(prev => ({ ...prev, type: value as 'link' | 'file' | 'video' | 'document' }))}>
                       <SelectTrigger>
                         <SelectValue />
                       </SelectTrigger>
@@ -716,5 +728,22 @@ export default function CreateAssignmentPage() {
         </div>
       </motion.div>
     </DashboardLayout>
+  );
+}
+
+export default function CreateAssignmentPage() {
+  return (
+    <Suspense fallback={
+      <DashboardLayout>
+        <div className="flex items-center justify-center min-h-screen">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-scholiax-purple mx-auto mb-4"></div>
+            <p className="text-gray-600">Loading...</p>
+          </div>
+        </div>
+      </DashboardLayout>
+    }>
+      <CreateAssignmentContent />
+    </Suspense>
   );
 }

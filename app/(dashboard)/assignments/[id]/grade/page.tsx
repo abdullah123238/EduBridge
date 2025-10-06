@@ -26,7 +26,8 @@ import {
   MessageSquare,
   Star,
   Save,
-  Send
+  Send,
+  X
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { formatDateMedium } from '@/lib/utils';
@@ -80,7 +81,7 @@ export default function AssignmentGradingPage() {
     }
   });
 
-  const currentSubmission = submissions.find(s => s._id === selectedSubmission);
+  const currentSubmission = submissions.find((s: any) => s._id === selectedSubmission);
 
   // Handle URL parameter changes
   useEffect(() => {
@@ -120,7 +121,7 @@ export default function AssignmentGradingPage() {
           maxScore: currentSubmission.maxScore,
           feedback: data.feedback,
           instructorNotes: data.instructorNotes,
-          gradedBy: user?.id,
+          gradedBy: user?._id,
           gradingCriteria
         }
       });
@@ -204,7 +205,7 @@ export default function AssignmentGradingPage() {
                     ))}
                   </div>
                 ) : submissions.length > 0 ? (
-                  submissions.map((submission) => (
+                  submissions.map((submission: any) => (
                     <div
                       key={submission._id}
                       className={`p-3 border rounded-lg cursor-pointer transition-colors ${
@@ -288,7 +289,7 @@ export default function AssignmentGradingPage() {
                       <div>
                         <h4 className="font-medium mb-2">Files:</h4>
                         <div className="space-y-2">
-                          {currentSubmission.files.map((file, index) => (
+                          {currentSubmission.files.map((file: any, index: number) => (
                             <div key={index} className="flex items-center justify-between p-3 border rounded-lg">
                               <div className="flex items-center space-x-3">
                                 <FileText className="w-4 h-4 text-gray-500" />

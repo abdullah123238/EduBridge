@@ -246,7 +246,7 @@ export function MaterialViewer({
             
             <div className="flex items-center justify-between text-sm text-muted-foreground">
               <span className="break-words">Overall Progress: {Math.round(((progress?.completedPages || 0) / totalPages) * 100)}%</span>
-              <span className="break-words">Total Time: {formatTime(progress?.totalTimeSpent || 0)}</span>
+              <span className="break-words">Total Time: {formatTime(progress?.pages?.reduce((sum: number, page: any) => sum + (page.timeSpent || 0), 0) || 0)}</span>
             </div>
           </div>
         </CardContent>
