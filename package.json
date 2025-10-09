@@ -75,5 +75,21 @@
     "typescript": "5.2.2",
     "vaul": "^0.9.9",
     "zod": "^4.0.14"
-  }
+  },
+  "description": "",
+  "main": "next.config.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abdullah123238/EduBridge.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/abdullah123238/EduBridge/issues"
+  },
+  "homepage": "https://github.com/abdullah123238/EduBridge#readme"
 }

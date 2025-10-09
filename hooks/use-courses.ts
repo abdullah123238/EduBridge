@@ -34,6 +34,21 @@ export function useUserCourses(page: number = 1, limit: number = 10) {
   });
 }
 
+export function usePublicCourses(page: number = 1, limit: number = 10, search?: string) {
+  return useQuery<PaginatedResponse<Course>>({
+    queryKey: ['public-courses', page, limit, search],
+    queryFn: async () => {
+      const params = new URLSearchParams({
+        page: page.toString(),
+        limit: limit.toString(),
+        ...(search && { search }),
+      });
+      const response = await api.get(`/courses/public?${params}`);
+      return response.data;
+    },
+  });
+}
+
 export function useCourse(id: string) {
   return useQuery<ApiResponse<Course>>({
     queryKey: ['course', id],
