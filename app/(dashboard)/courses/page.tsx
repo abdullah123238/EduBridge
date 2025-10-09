@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { DashboardLayout } from '@/components/layout/dashboard-layout';
-import { useUserCourses, useEnrollCourse } from '@/hooks/use-courses';
+import { useUserCourses, usePublicCourses, useEnrollCourse } from '@/hooks/use-courses';
 import { useAuth } from '@/lib/auth-context';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -19,14 +19,15 @@ export default function CoursesPage() {
   const [page, setPage] = useState(1);
   const [enrollingCourseId, setEnrollingCourseId] = useState<string | null>(null);
   const [enrolledCourses, setEnrolledCourses] = useState<Set<string>>(new Set());
-  const { data: coursesData, isLoading } = useUserCourses(page, 12);
+  const { data: coursesData, isLoading } = user?.role === 'lecturer' ? useUserCourses(page, 12) : usePublicCourses(page, 12, search);
   const enrollMutation = useEnrollCourse();
 
   const isLecturer = user?.role === 'lecturer';
   const allCourses = coursesData?.data || [];
   
-  // Filter courses based on search term
-  const courses = allCourses.filter(course => {
+  // For lecturers, filter courses based on search term
+  // For students, search is handled by the API call
+  const courses = isLecturer ? allCourses.filter(course => {
     if (!search) return true;
     const searchLower = search.toLowerCase();
     return (
@@ -35,7 +36,7 @@ export default function CoursesPage() {
       course.description.toLowerCase().includes(searchLower) ||
       course.lecturer.name.toLowerCase().includes(searchLower)
     );
-  });
+  }) : allCourses;
 
   // Update enrolled courses when user data changes
   React.useEffect(() => {
@@ -43,6 +44,13 @@ export default function CoursesPage() {
       setEnrolledCourses(new Set(user.enrolledCourses));
     }
   }, [user?.enrolledCourses]);
+
+  // Reset page when search changes for students
+  React.useEffect(() => {
+    if (!isLecturer) {
+      setPage(1);
+    }
+  }, [search, isLecturer]);
 
   const handleEnroll = (courseId: string) => {
     setEnrollingCourseId(courseId);
